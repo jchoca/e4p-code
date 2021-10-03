@@ -16,4 +16,8 @@ defmodule Hangman do
   def force_lose(game_pid) do
     GenServer.call(game_pid, { :force_lose })
   end
+
+  def initialized(game_pid) do
+    GenServer.call(game_pid, { :initialized })
+  end
 end

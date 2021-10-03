@@ -2,7 +2,7 @@ defmodule Hangman.Game do
 
   defstruct(
     turns_left: 7,
-    game_state: :initializing,
+    game_state: :new_game,
     letters:    [],
     used:       MapSet.new(),
   )
@@ -39,6 +39,11 @@ defmodule Hangman.Game do
   def force_lose(game) do
     Map.put(game, :game_state, :lost)
     |> Map.put(:turns_left, 0)
+    |> return_with_tally()
+  end
+
+  def initialized(game) do
+    Map.put(game, :game_state, :initialized)
     |> return_with_tally()
   end
 

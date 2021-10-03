@@ -7,7 +7,7 @@ defmodule GameTest do
     game = Game.new_game()
 
     assert game.turns_left == 7
-    assert game.game_state == :initializing
+    assert game.game_state == :new_game
     assert length(game.letters) > 0
   end
 
@@ -94,5 +94,13 @@ defmodule GameTest do
     { game, _ } = Game.force_lose(game)
     assert game.game_state == :lost
     assert game.turns_left == 0
+  end
+
+  test "initialized updates game state to initialized" do
+    game = Game.new_game("a")
+    assert game.game_state == :new_game
+
+    { game, _ } = Game.initialized(game)
+    assert game.game_state == :initialized
   end
 end

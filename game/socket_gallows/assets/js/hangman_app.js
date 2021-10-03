@@ -4,7 +4,8 @@ const RESPONSES = {
     good_guess:   [ "success", "Good guess!" ],
     bad_guess:    [ "warning", "Bad guess!" ],
     already_used: [ "info",    "You already guessed that" ],
-    initializing: [ "info",    "Let's Play!" ]
+    new_game:     [ "info",    "Let's Play!" ],
+    initialized:  [ "info",    "Let's Play!" ],
 }
 
 import HangmanSocket from "./hangman_socket"
@@ -58,7 +59,7 @@ window.onload = function() {
     let tally = {
         turns_left: 7,
         letters:    ["a", "_", "c" ],
-        game_state: "initializing",
+        game_state: "new_game",
         used:       [ ]
     }
     let hangman = new HangmanSocket(tally)

@@ -21,7 +21,12 @@ defmodule Hangman.Server do
   end
 
   def handle_call({ :force_lose }, _from, game) do
-    { game, tally } = Game.force_lose(game)
+    { game, _ } = Game.force_lose(game)
+    { :reply, Game.tally(game), game }
+  end
+
+  def handle_call({ :initialized }, _from, game) do
+    { game, _ } = Game.initialized(game)
     { :reply, Game.tally(game), game }
   end
 end
