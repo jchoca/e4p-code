@@ -36,6 +36,11 @@ defmodule Hangman.Game do
     }
   end
 
+  def force_lose(game) do
+    Map.put(game, :game_state, :lost)
+    |> Map.put(:turns_left, 0)
+    |> return_with_tally()
+  end
 
   ############################################################
 

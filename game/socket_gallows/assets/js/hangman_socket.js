@@ -3,6 +3,7 @@ import {Socket} from "phoenix"
 export default class HangmanSocket {
     constructor(tally) {
         this.tally  = tally
+        tally.seconds_left = 60
         this.socket = new Socket("/socket", { })
         this.socket.connect()
     }
@@ -25,6 +26,9 @@ export default class HangmanSocket {
         this.channel = this.socket.channel("hangman:game", {})
         this.channel.on("tally", (tally) => {
             this.copy_tally(tally)
+        })
+        this.channel.on("seconds_left", seconds_left_reply => {
+            this.tally.seconds_left = seconds_left_reply.seconds_left
         })
     }
 

@@ -27,6 +27,9 @@ let view = function(hangman) {
             game_state_class: function() {
                 let state = this.tally.game_state
                 return RESPONSES[state][0]
+            },
+            seconds_left: function() {
+                return this.tally.seconds_left
             }
         },
         methods: {
@@ -62,5 +65,4 @@ window.onload = function() {
     let app     = view(hangman)
     
     hangman.connect_to_hangman()
-    
 }

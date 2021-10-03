@@ -2,7 +2,7 @@ defmodule GameTest do
   use ExUnit.Case
 
   alias Hangman.Game
-  
+
   test "new_game returns structure" do
     game = Game.new_game()
 
@@ -38,7 +38,7 @@ defmodule GameTest do
     assert game.game_state == :good_guess
     assert game.turns_left == 7
   end
-  
+
   test "a guessed word is a won game" do
     game = Game.new_game("wibble")
     { game, _ } = Game.make_move(game, "w")
@@ -88,5 +88,11 @@ defmodule GameTest do
     { game, _ } = Game.make_move(game, "g")
     assert game.game_state == :lost
   end
-  
+
+  test "force lose causes game to be lost" do
+    game = Game.new_game("a")
+    { game, _ } = Game.force_lose(game)
+    assert game.game_state == :lost
+    assert game.turns_left == 0
+  end
 end
